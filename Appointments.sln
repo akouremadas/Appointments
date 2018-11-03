@@ -3,7 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appointments.WebUI", "Appointments.WebUI\Appointments.WebUI.csproj", "{158E306C-4494-437A-8EB3-FF9B7FE09731}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appointments.Domain", "Appointments.Domain\Appointments.Domain.csproj", "{BE547231-9B9B-4024-A9A2-B78846F26576}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{158E306C-4494-437A-8EB3-FF9B7FE09731}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{158E306C-4494-437A-8EB3-FF9B7FE09731}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{158E306C-4494-437A-8EB3-FF9B7FE09731}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{158E306C-4494-437A-8EB3-FF9B7FE09731}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE547231-9B9B-4024-A9A2-B78846F26576}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE547231-9B9B-4024-A9A2-B78846F26576}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE547231-9B9B-4024-A9A2-B78846F26576}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE547231-9B9B-4024-A9A2-B78846F26576}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
