@@ -9,8 +9,8 @@ namespace Appointments.Domain.Entities
     public class Client : ModelBase
     {
         public string Name { get; set; }
-        public virtual Phone Landline { get; set; }
-        public virtual Phone Mobile { get; set; }
-        public virtual Address ClientAddress { get; set; }
+        public Phone Landline { get; set; }
+        public Phone Mobile { get; set; }
+        public Address ClientAddress { get; set; }
     }
 }
