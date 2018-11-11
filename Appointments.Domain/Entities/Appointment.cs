@@ -9,11 +9,15 @@ namespace Appointments.Domain.Entities
 {
     public class Appointment : ModelBase
     {
+        [DataType(DataType.Date)]
         public DateTime StartDateTime { get; set; }
-        public Result Result { get; set; }
-        public Client Client { get; set; }
+        public int ResultId { get; set; }
+        public int ClientId { get; set; }
         [DataType(DataType.MultilineText)]
         public string Comments { get; set; }
+
+        public virtual Result Result { get; set; }
+        public virtual Client Client { get; set; }
 
     }
 }

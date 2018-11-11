@@ -1,0 +1,120 @@
+﻿@model Appointments.Domain.Entities.Client
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Client</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prefecture)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prefecture)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Municipality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Municipality)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Area)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Area)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Street)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Street)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Postal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Postal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mobile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mobile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fixed_Line)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fixed_Line)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            Appointments History @*@Html.DisplayNameFor(model => model.Appointments)*@
+        </dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Appointment Date & Time</th>
+                    <th>Result</th>
+                </tr>
+                @foreach (var item in Model.Appointments)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartDateTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Result.ResultName)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", "Appointment", new { id = item.Id }) |
+                            @Html.ActionLink("Details", "Details", "Appointment", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", "Appointment", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+                <p>
+                    @Html.ActionLink("Create New", "Create", "Appointment", new {  clID = Model.Id}, null)
+                </p>
+            </table>
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -152,22 +152,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\IAddressRepository.cs" />
-    <Compile Include="Abstract\IAppointmentRepository.cs" />
-    <Compile Include="Abstract\IClientRepository.cs" />
-    <Compile Include="Abstract\IPhoneRepository.cs" />
-    <Compile Include="Abstract\IResultRepository.cs" />
-    <Compile Include="Concrete\AddressRepository.cs" />
-    <Compile Include="Concrete\AppointmentRepository.cs" />
-    <Compile Include="Concrete\ClientRepository.cs" />
-    <Compile Include="Concrete\PhoneRepository.cs" />
-    <Compile Include="Concrete\ResultRepository.cs" />
-    <Compile Include="Entities\Address.cs" />
     <Compile Include="Entities\Appointment.cs" />
     <Compile Include="Entities\Client.cs" />
     <Compile Include="Entities\IdentityModels.cs" />
     <Compile Include="Entities\ModelBase.cs" />
-    <Compile Include="Entities\Phone.cs" />
     <Compile Include="Entities\Result.cs" />
     <Compile Include="Migrations\DbMigrationsConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
