@@ -101,14 +101,14 @@
                             @Html.DisplayFor(modelItem => item.Result.ResultName)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", "Appointment", new { id = item.Id }) |
-                            @Html.ActionLink("Details", "Details", "Appointment", new { id = item.Id }) |
-                            @Html.ActionLink("Delete", "Delete", "Appointment", new { id = item.Id })
+                            @Html.ActionLink("Edit", "Edit", "Appointment", new { id = item.Id }, null) | @*NO return to clients details list*@
+                            @Html.ActionLink("Details", "Details", "Appointment", new { id = item.Id }, null) | @*NO return to clients details list*@
+                            @Html.ActionLink("Delete", "Delete", "Appointment", new { id = item.Id }, null) @*NO return to clients details list*@
                         </td>
                     </tr>
                 }
                 <p>
-                    @Html.ActionLink("Create New", "Create", "Appointment", new {  clID = Model.Id}, null)
+                    @Html.ActionLink("Create New", "Create", "Appointment", new { clID = Model.Id}, null)
                 </p>
             </table>
         </dd>

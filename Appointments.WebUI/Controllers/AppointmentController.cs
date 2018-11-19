@@ -94,7 +94,7 @@ namespace Appointments.WebUI.Controllers
 
                     db.Appointments.Add(appointment);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Details", "Client", new { id = clID});
                 }
 
                 ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name", appointment.ClientId = (int)clID);
@@ -138,20 +138,42 @@ namespace Appointments.WebUI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,StartDateTime,ResultId,ClientId,Comments,DateCreated,DateUpdated,CreatedBy,UpdatedBy")] Appointment appointment)
+        public ActionResult Edit([Bind(Include = "Id,StartDateTime,ResultId,ClientId,Comments,DateCreated,DateUpdated,CreatedBy,UpdatedBy")] Appointment appointment, int? clID)
         {
-            if (ModelState.IsValid)
-            {
-                appointment.DateUpdated = DateTime.Now;
-                appointment.UpdatedBy = User.Identity.Name;
 
-                db.Entry(appointment).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+            if (clID == null)
+            {
+                if (ModelState.IsValid)
+                {
+                    appointment.DateUpdated = DateTime.Now;
+                    appointment.UpdatedBy = User.Identity.Name;
+
+                    db.Entry(appointment).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name", appointment.ClientId);
+                ViewBag.ResultId = new SelectList(db.Results, "Id", "ResultName", appointment.ResultId);
+                return View(appointment);
             }
-            ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name", appointment.ClientId);
-            ViewBag.ResultId = new SelectList(db.Results, "Id", "ResultName", appointment.ResultId);
-            return View(appointment);
+
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    appointment.DateUpdated = DateTime.Now;
+                    appointment.UpdatedBy = User.Identity.Name;
+                    appointment.ClientId = (int)clID;
+
+                    db.Entry(appointment).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Details", "Client", new { id = clID });
+                }
+                ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name", appointment.ClientId = (int)clID);
+                ViewBag.ResultId = new SelectList(db.Results, "Id", "ResultName", appointment.ResultId);
+                return View(appointment);
+            }
+            
         }
 
         // GET: Appointment/Delete/5
