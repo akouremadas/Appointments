@@ -38,11 +38,22 @@ namespace Appointments.WebUI.Controllers
         }
 
         // GET: Appointment/Create
-        public ActionResult Create()
+        public ActionResult Create(int? clID)
         {
-            ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name");
-            ViewBag.ResultId = new SelectList(db.Results, "Id", "ResultName");
-            return View();
+            if (clID == null)
+            {
+                ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name");
+                ViewBag.ResultId = new SelectList(db.Results, "Id", "ResultName");
+                return View();
+            }
+
+            else
+            {
+                ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name", clID);
+                ViewBag.ResultId = new SelectList(db.Results, "Id", "ResultName");
+                return View();
+            }
+
         }
 
         // POST: Appointment/Create
@@ -50,24 +61,48 @@ namespace Appointments.WebUI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,StartDateTime,ResultId,ClientId,Comments,DateCreated,DateUpdated,CreatedBy,UpdatedBy")] Appointment appointment)
+        public ActionResult Create([Bind(Include = "Id,StartDateTime,ResultId,ClientId,Comments,DateCreated,DateUpdated,CreatedBy,UpdatedBy")] Appointment appointment, int? clID)
         {
 
-            if (ModelState.IsValid)
+            if (clID == null)
             {
-                appointment.DateCreated = DateTime.Now;
-                appointment.DateUpdated = DateTime.Now;
-                appointment.CreatedBy = User.Identity.Name;
-                appointment.UpdatedBy = User.Identity.Name;
+                if (ModelState.IsValid)
+                {
+                    appointment.DateCreated = DateTime.Now;
+                    appointment.DateUpdated = DateTime.Now;
+                    appointment.CreatedBy = User.Identity.Name;
+                    appointment.UpdatedBy = User.Identity.Name;
 
-                db.Appointments.Add(appointment);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                    db.Appointments.Add(appointment);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+                ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name", appointment.ClientId);
+                ViewBag.ResultId = new SelectList(db.Results, "Id", "ResultName", appointment.ResultId);
+                return View(appointment);
+            }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    appointment.DateCreated = DateTime.Now;
+                    appointment.DateUpdated = DateTime.Now;
+                    appointment.CreatedBy = User.Identity.Name;
+                    appointment.UpdatedBy = User.Identity.Name;
+                    appointment.ClientId = (int)clID;
+
+                    db.Appointments.Add(appointment);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+                ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name", appointment.ClientId = (int)clID);
+                ViewBag.ResultId = new SelectList(db.Results, "Id", "ResultName", appointment.ResultId);
+                return View(appointment);
             }
 
-            ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name", appointment.ClientId);
-            ViewBag.ResultId = new SelectList(db.Results, "Id", "ResultName", appointment.ResultId);
-            return View(appointment);
+            
         }
 
         // GET: Appointment/Edit/5
