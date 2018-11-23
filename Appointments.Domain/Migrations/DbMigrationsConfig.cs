@@ -25,26 +25,27 @@ namespace Appointments.Domain.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
 
-            const string name = "admin@admin.com";
+            const string email = "admin@admin.com";
             const string password = "Admin@123456";
             const string roleName = "Admin";
+            const string username = "admin";
 
 
             if (!context.Roles.Any(r => r.Name == roleName))
             {
-                var store = new RoleStore<IdentityRole>(context);
-                var manager = new RoleManager<IdentityRole>(store);
-                var role = new IdentityRole { Name = roleName };
+                var store = new RoleStore<ApplicationRole>(context);
+                var manager = new RoleManager<ApplicationRole>(store);
+                var role = new ApplicationRole { Name = roleName };
 
                 manager.Create(role);
             }
 
-            if (!context.Users.Any(u => u.UserName == name))
+            if (!context.Users.Any(u => u.UserName == username))
             {
 
                 var store = new UserStore<ApplicationUser>(context);
                 var manager = new UserManager<ApplicationUser>(store);
-                var user = new ApplicationUser {UserName = name, Email = name };
+                var user = new ApplicationUser {UserName = username, Email = email };
 
                 manager.Create(user, password) ;
                 manager.AddToRole(user.Id, "Admin");
