@@ -13,11 +13,9 @@ namespace Appointments.Domain.Entities
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
-        [DataType(DataType.Date)]
         [HiddenInput(DisplayValue = false)]
         public DateTime DateCreated { get; set; }
 
-        [DataType(DataType.Date)]
         [HiddenInput(DisplayValue = false)]
         public DateTime DateUpdated { get; set; }
 
