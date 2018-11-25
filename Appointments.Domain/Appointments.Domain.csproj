@@ -163,7 +163,6 @@
     <Compile Include="Entities\IdentityModels.cs" />
     <Compile Include="Entities\ModelBase.cs" />
     <Compile Include="Entities\Result.cs" />
-    <Compile Include="Entities\UserRolesDTO.cs" />
     <Compile Include="Migrations\DbMigrationsConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -10,7 +10,7 @@ namespace Appointments.Domain.Migrations
     using System.Linq;
     using System.Web;
 
-    public sealed class DbMigrationsConfig : DbMigrationsConfiguration<Appointments.Domain.Entities.ApplicationDbContext>
+    public sealed class DbMigrationsConfig : DbMigrationsConfiguration<ApplicationDbContext>
     {
         public DbMigrationsConfig()
         {
@@ -42,9 +42,9 @@ namespace Appointments.Domain.Migrations
             if (!context.Users.Any(u => u.UserName == username))
             {
 
-                var store = new UserStore<ApplicationUser>(context);
-                var manager = new UserManager<ApplicationUser>(store);
-                var user = new ApplicationUser { UserName = username, Email = email };
+                var store = new UserStore<User>(context);
+                var manager = new UserManager<User>(store);
+                var user = new User { UserName = username, Email = email };
 
                 manager.Create(user, password);
                 manager.AddToRole(user.Id, "Admin");
@@ -67,9 +67,9 @@ namespace Appointments.Domain.Migrations
             if (!context.Users.Any(u => u.UserName == username1))
             {
 
-                var store = new UserStore<ApplicationUser>(context);
-                var manager = new UserManager<ApplicationUser>(store);
-                var user = new ApplicationUser { UserName = username1, Email = email1 };
+                var store = new UserStore<User>(context);
+                var manager = new UserManager<User>(store);
+                var user = new User { UserName = username1, Email = email1 };
 
                 manager.Create(user, password1);
                 manager.AddToRole(user.Id, "Supervisor");
@@ -92,9 +92,9 @@ namespace Appointments.Domain.Migrations
             if (!context.Users.Any(u => u.UserName == username2))
             {
 
-                var store = new UserStore<ApplicationUser>(context);
-                var manager = new UserManager<ApplicationUser>(store);
-                var user = new ApplicationUser { UserName = username2, Email = email2 };
+                var store = new UserStore<User>(context);
+                var manager = new UserManager<User>(store);
+                var user = new User { UserName = username2, Email = email2 };
 
                 manager.Create(user, password2);
                 manager.AddToRole(user.Id, "Team Leader");
@@ -117,9 +117,9 @@ namespace Appointments.Domain.Migrations
             if (!context.Users.Any(u => u.UserName == username3))
             {
 
-                var store = new UserStore<ApplicationUser>(context);
-                var manager = new UserManager<ApplicationUser>(store);
-                var user = new ApplicationUser { UserName = username3, Email = email3 };
+                var store = new UserStore<User>(context);
+                var manager = new UserManager<User>(store);
+                var user = new User { UserName = username3, Email = email3 };
 
                 manager.Create(user, password3);
                 manager.AddToRole(user.Id, "Team Leader");
