@@ -11,6 +11,7 @@ using Appointments.Domain.Entities;
 
 namespace Appointments.WebUI.Controllers
 {
+    [Authorize(Roles = "Team Leader,Supervisor,Admin")]
     public class RoleController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

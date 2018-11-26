@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Door2Door Appointments Management System</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -27,7 +27,12 @@
                     <li>@Html.ActionLink("My Appointments", "Index", "Appointment")</li>
                     <li>@Html.ActionLink("Results", "Index", "Result")</li>
                     <li>@Html.ActionLink("Clients", "Index", "Client")</li>
-                    <li>@Html.ActionLink("Administration", "Index", "Admin")</li>
+
+                    @if (User.IsInRole("Team Leader") || User.IsInRole("Supervisor") || User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("User Roles", "Index", "Role")</li>
+                        <li>@Html.ActionLink("Users", "Index", "User")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -37,7 +42,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Door2Door Appointments Management System</p>
         </footer>
     </div>
 
