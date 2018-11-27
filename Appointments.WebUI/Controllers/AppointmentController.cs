@@ -197,7 +197,10 @@ namespace Appointments.WebUI.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Appointment appointment = db.Appointments.Find(id);
-            db.Appointments.Remove(appointment);
+
+            appointment.IsDeleted = true;
+            appointment.DateDeleted = appointment.DateUpdated;
+            appointment.DeletedBy = appointment.UpdatedBy;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

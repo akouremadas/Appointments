@@ -18,9 +18,7 @@ namespace Appointments.Domain.Entities
         public string Mobile { get; set; }
         public string Fixed_Line { get; set; }
         public string Email { get; set; }
-
-
-
+        
         public virtual ICollection<Appointment> Appointments { get; set; }
         //public Phone Landline { get; set; }
         //public Phone Mobile { get; set; }

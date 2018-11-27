@@ -48,10 +48,15 @@ namespace Appointments.WebUI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name")] ApplicationRole applicationRole)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,DateCreated,DateUpdated,CreatedBy,UpdatedBy,IsDeleted,DateDeleted,DeletedBy")] ApplicationRole applicationRole)
         {
             if (ModelState.IsValid)
             {
+                applicationRole.DateCreated = DateTime.Now;
+                applicationRole.DateUpdated = DateTime.Now;
+                applicationRole.CreatedBy = this.User.Identity.Name;
+                applicationRole.UpdatedBy = this.User.Identity.Name;
+
                 db.IdentityRoles.Add(applicationRole);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -80,10 +85,13 @@ namespace Appointments.WebUI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name")] ApplicationRole applicationRole)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,DateCreated,DateUpdated,CreatedBy,UpdatedBy,IsDeleted,DateDeleted,DeletedBy")] ApplicationRole applicationRole)
         {
             if (ModelState.IsValid)
             {
+                applicationRole.DateUpdated = DateTime.Now;
+                applicationRole.UpdatedBy = this.User.Identity.Name;
+
                 db.Entry(applicationRole).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -112,7 +120,12 @@ namespace Appointments.WebUI.Controllers
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
             ApplicationRole applicationRole = await db.IdentityRoles.FindAsync(id);
-            db.IdentityRoles.Remove(applicationRole);
+
+
+            applicationRole.IsDeleted = true;
+            applicationRole.DateDeleted = applicationRole.DateUpdated;
+            applicationRole.DeletedBy = this.User.Identity.Name;
+
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

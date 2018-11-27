@@ -102,6 +102,7 @@ namespace Appointments.WebUI
         }
     }
 
+
     // This is useful if you do not want to tear down the database each time you run the application.
     // public class ApplicationDbInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
     // This example shows you how to create a new database if the Model changes

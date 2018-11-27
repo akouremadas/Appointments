@@ -46,10 +46,15 @@ namespace Appointments.WebUI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] User user)
+        public ActionResult Create([Bind(Include = "Id,IsDeleted,DateDeleted,DeletedBy,DateCreated,DateUpdated,CreatedBy,UpdatedBy,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,FullName")] User user)
         {
             if (ModelState.IsValid)
             {
+                user.DateCreated = DateTime.Now;
+                user.DateUpdated = DateTime.Now;
+                user.CreatedBy = this.User.Identity.Name;
+                user.UpdatedBy = this.User.Identity.Name;
+
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -78,10 +83,13 @@ namespace Appointments.WebUI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] User user)
+        public ActionResult Edit([Bind(Include = "Id,IsDeleted,DateDeleted,DeletedBy,DateCreated,DateUpdated,CreatedBy,UpdatedBy,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,FullName")] User user)
         {
             if (ModelState.IsValid)
             {
+                user.DateUpdated = DateTime.Now;
+                user.UpdatedBy = this.User.Identity.Name;
+
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -110,7 +118,12 @@ namespace Appointments.WebUI.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             User user = db.Users.Find(id);
-            db.Users.Remove(user);
+
+            user.IsDeleted = true;
+            user.DateDeleted = user.DateUpdated;
+            user.DeletedBy = this.User.Identity.Name;
+            user.PasswordHash = null;
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }

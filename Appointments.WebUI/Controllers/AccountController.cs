@@ -152,10 +152,12 @@ namespace Appointments.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.UserName, Email = model.Email };
+                var user = new User { UserName = model.UserName, Email = model.Email, DateCreated = DateTime.Now, DateUpdated = DateTime.Now, CreatedBy = model.UserName, UpdatedBy = model.UserName, FullName = model.FullName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    /*result = */await UserManager.AddToRoleAsync(user.Id, "Sales Rep");
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

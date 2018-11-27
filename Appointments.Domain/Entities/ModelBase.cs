@@ -25,6 +25,15 @@ namespace Appointments.Domain.Entities
         [HiddenInput(DisplayValue = false)]
         public string UpdatedBy { get; set; }
 
+        [HiddenInput(DisplayValue = false)]
+        public bool IsDeleted { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
+        public DateTime? DateDeleted { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
+        public string DeletedBy { get; set; }
+
         //[HiddenInput(DisplayValue = false)]
         //public string Name { get; set; }
 
