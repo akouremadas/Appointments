@@ -9,10 +9,17 @@ namespace Appointments.Domain.Entities
 {
     public class Appointment : ModelBase
     {
+        [Display(Name ="Appointment Date & Time")]
         [DataType(DataType.Date)]
         public DateTime StartDateTime { get; set; }
+
+        [Display(Name = "Appointment Result")]
         public int ResultId { get; set; }
+
+        [Display(Name = "Client Name")]
         public int ClientId { get; set; }
+
+        [Display(Name = "Appointment Comments")]
         [DataType(DataType.MultilineText)]
         public string Comments { get; set; }
 

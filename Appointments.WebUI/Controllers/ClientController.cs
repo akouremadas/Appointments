@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Appointments.Domain.Entities;
+using Microsoft.AspNet.Identity;
 
 namespace Appointments.WebUI.Controllers
 {
@@ -17,7 +18,7 @@ namespace Appointments.WebUI.Controllers
 
         // GET: Client
         public ActionResult Index()
-        {
+        {            
             return View(db.Clients.ToList());
         }
 
