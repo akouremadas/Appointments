@@ -5,50 +5,61 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        <h3 class="box-title">
-            <b>Users with Roles</b>
-        </h3>
-    </div>
-    <!-- /.box-header -->
-    <div class="panel-body">
-        <table class="table table-hover table-bordered table-condensed" id="example1">
-            <thead>
-                <tr>
-                    <td><b>Role</b></td>
-                    <td><b>Username</b></td>
-                </tr>
-            </thead>
-            @foreach (var user in Model)
-            {
-                <tr>
-                    <td>@user.Role</td>
-                    <td>@user.Username</td>
-                </tr>
-            }
-        </table>
-    </div>
+<h2>Roles with Users</h2>
 
-    <div class="panel-footer">
-        <p class="box-title"><b>Total Roles till @String.Format("{0 : dddd, MMMM d, yyyy}", DateTime.Now)  : </b><span class="label label-primary">@Model.Count()</span></p>
-    </div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Role)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.RoleId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.RoleId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.RoleId })
+            </td>
+
+        </tr>
+    }
+</table>
+<p></p>
+<div>
+    <p class="box-title"><b>Total Roles: </b><span class="label label-primary">@Model.Count()</span></p>
 </div>
-@Html.ActionLink("Back to List", "Index")
+<p></p>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
 
 
-@section scripts{
-    <script>
-        $(function () {
-            $("#example1").DataTable();
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true
+
+
+    @section scripts{
+        <script>
+            $(function () {
+                $("#example1").DataTable();
+                $('#example2').DataTable({
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": true
+                });
             });
-        });
-    </script>
-}
+        </script>
+    }

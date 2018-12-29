@@ -4,11 +4,17 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Index of Users</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div class="form-group">
+    <div>
+        <input type="submit" class="btn btn-default btn-info" value="Create New User" onclick="location.href='@Url.Action("Create", "User")'" />
+    </div>
+    <br />
+    <div>
+        <input type="button" class="btn btn-default btn-info" value="Show Users to Roles" onclick="location.href='@Url.Action("UsersWithRoles", "User")'" />
+    </div>
+</div>
 <table class="table">
     <tr>
         <th>
@@ -22,9 +28,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.PhoneNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Roles)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.AccessFailedCount)
@@ -44,7 +47,7 @@
         <th>
             @Html.DisplayNameFor(model => model.DeletedBy)
         </th>
-        <th></th>
+        <th>Actions</th>
     </tr>
 
 @foreach (var item in Model) {
@@ -61,12 +64,6 @@
         <td>
             @Html.DisplayFor(modelItem => item.PhoneNumber)
         </td>
-        @foreach (var x in item.Roles)
-        {
-            <td>
-                @Html.DisplayTextFor(modelItem => x.RoleId@* it is not working!!!!!!!!!!!!!!!!!!!!!!!!!!*@) 
-            </td>
-        }
         <td>
             @Html.DisplayFor(modelItem => item.AccessFailedCount)
         </td>

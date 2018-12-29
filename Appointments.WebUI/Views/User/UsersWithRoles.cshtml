@@ -5,39 +5,45 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        <h3 class="box-title">
-            <b>Users with Roles</b>
-        </h3>
-    </div>
-    <!-- /.box-header -->
-    <div class="panel-body">
-        <table class="table table-hover table-bordered table-condensed" id="example1">
-            <thead>
-                <tr>
-                    <td><b>Username</b></td>
-                    <td><b>Email</b></td>
-                    <td><b>Roles</b></td>
-                </tr>
-            </thead>
-            @foreach (var user in Model)
-            {
-                <tr>
-                    <td>@user.Username</td>
-                    <td>@user.Email</td>
-                    <td>@user.Role</td>
+<h2>Users with Roles</h2>
 
-                </tr>
-            }
-        </table>
-    </div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Role)
+        </th>
+        <th>Actions</th>
+    </tr>
 
-    <div class="panel-footer">
-        <p class="box-title"><b>Total Users till @String.Format("{0 : dddd, MMMM d, yyyy}", DateTime.Now)  : </b><span class="label label-primary">@Model.Count()</span></p>
-    </div>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.UserId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.UserId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.UserId })
+            </td>
+
+        </tr>
+    }
+</table>
+<p></p>
+<div>
+    <p class="box-title"><b>Total Users: </b><span class="label label-primary">@Model.Count()</span></p>
 </div>
-
+<p></p>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
 
 @section scripts{
     <script>
