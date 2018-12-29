@@ -31,11 +31,11 @@ namespace Appointments.Domain.Entities
 
         [Display(Name = "Date Created")]
         [HiddenInput(DisplayValue = false)]
-        public DateTime DateCreated { get; set; }
+        public DateTime? DateCreated { get; set; }
 
         [Display(Name = "Date Updated")]
         [HiddenInput(DisplayValue = false)]
-        public DateTime DateUpdated { get; set; }
+        public DateTime? DateUpdated { get; set; }
 
         [Display(Name = "Created By")]
         [HiddenInput(DisplayValue = false)]
@@ -44,7 +44,6 @@ namespace Appointments.Domain.Entities
         [Display(Name = "Updated By")]
         [HiddenInput(DisplayValue = false)]
         public string UpdatedBy { get; set; }
-
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {
@@ -84,7 +83,6 @@ namespace Appointments.Domain.Entities
         [Display(Name = "Status Changed By")]
         [HiddenInput(DisplayValue = false)]
         public string DeletedBy { get; set; }
-
 
         public ApplicationRole() : base() { }
         public ApplicationRole(string roleName) : base(roleName) { }
