@@ -122,7 +122,7 @@ namespace Appointments.Domain.Migrations
                 var user = new User { UserName = username3, Email = email3 };
 
                 manager.Create(user, password3);
-                manager.AddToRole(user.Id, "Team Leader");
+                manager.AddToRole(user.Id, "Sales Rep");
             }
 
             context.Results.AddOrUpdate(

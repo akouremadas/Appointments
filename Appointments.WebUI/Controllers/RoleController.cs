@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Appointments.Domain.Entities;
+using Appointments.WebUI.Models;
 
 namespace Appointments.WebUI.Controllers
 {
@@ -20,6 +21,31 @@ namespace Appointments.WebUI.Controllers
         public async Task<ActionResult> Index()
         {
             return View(await db.IdentityRoles.ToListAsync());
+        }
+
+        public ActionResult RolesWithUsers()
+        {
+            var rolesWithUsers = (from role in db.IdentityRoles
+                                  select new
+                                  {
+                                      RoleId = role.Id,
+                                      Name = role.Name,
+                                      UserNames = (from roleUser in role.Users
+                                                   join user in db.Users on roleUser.UserId
+                                                   equals user.Id
+                                                   select user.UserName).ToList()
+                                  }).ToList().Select(p => new Roles_with_Users_Viewmodel()
+
+                                  {
+                                      RoleId = p.RoleId,
+                                      Role = p.Name,
+                                      Username = string.Join(" ,", p.UserNames)
+
+                                      //Role = string.Join(",", p.RoleNames)
+                                  });
+
+
+            return View(rolesWithUsers);
         }
 
         // GET: Role/Details/5
@@ -120,8 +146,6 @@ namespace Appointments.WebUI.Controllers
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
             ApplicationRole applicationRole = await db.IdentityRoles.FindAsync(id);
-
-
             applicationRole.IsDeleted = true;
             applicationRole.DateDeleted = applicationRole.DateUpdated;
             applicationRole.DeletedBy = this.User.Identity.Name;
