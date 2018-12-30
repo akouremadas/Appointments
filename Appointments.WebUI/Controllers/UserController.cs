@@ -9,27 +9,16 @@ using System.Web.Mvc;
 using Appointments.Domain.Entities;
 using Appointments.WebUI.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace Appointments.WebUI.Controllers
 {
-    [Authorize(Roles = "Team Leader,Supervisor,Admin")]
+    [Authorize/*(Roles = "Team Leader,Supervisor,Admin")*/]
     public class UserController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        //private ApplicationUserManager _userManager;
 
-        //public ApplicationUserManager UserManager
-        //{
-        //    get
-        //    {
-        //        return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-        //    }
-        //    private set
-        //    {
-        //        _userManager = value;
-        //    }
-        //}
 
         // GET: User
         public ActionResult Index()
@@ -179,5 +168,7 @@ namespace Appointments.WebUI.Controllers
             }
             base.Dispose(disposing);
         }
+
+        
     }
 }

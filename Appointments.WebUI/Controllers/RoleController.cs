@@ -12,7 +12,7 @@ using Appointments.WebUI.Models;
 
 namespace Appointments.WebUI.Controllers
 {
-    [Authorize(Roles = "Team Leader,Supervisor,Admin")]
+    [Authorize/*(Roles = "Team Leader,Supervisor,Admin")*/]
     public class RoleController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -20,12 +20,12 @@ namespace Appointments.WebUI.Controllers
         // GET: Role
         public async Task<ActionResult> Index()
         {
-            return View(await db.IdentityRoles.ToListAsync());
+            return View(await db.Roles.ToListAsync());
         }
 
         public ActionResult RolesWithUsers()
         {
-            var rolesWithUsers = (from role in db.IdentityRoles
+            var rolesWithUsers = (from role in db.Roles
                                   select new
                                   {
                                       RoleId = role.Id,
@@ -55,7 +55,7 @@ namespace Appointments.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationRole applicationRole = await db.IdentityRoles.FindAsync(id);
+            ApplicationRole applicationRole = db.Roles.Find(id);
             if (applicationRole == null)
             {
                 return HttpNotFound();
@@ -83,7 +83,7 @@ namespace Appointments.WebUI.Controllers
                 applicationRole.CreatedBy = this.User.Identity.Name;
                 applicationRole.UpdatedBy = this.User.Identity.Name;
 
-                db.IdentityRoles.Add(applicationRole);
+                db.Roles.Add(applicationRole);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -98,7 +98,7 @@ namespace Appointments.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationRole applicationRole = await db.IdentityRoles.FindAsync(id);
+            ApplicationRole applicationRole = db.Roles.Find(id);
             if (applicationRole == null)
             {
                 return HttpNotFound();
@@ -132,7 +132,7 @@ namespace Appointments.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationRole applicationRole = await db.IdentityRoles.FindAsync(id);
+            ApplicationRole applicationRole = db.Roles.Find(id);
             if (applicationRole == null)
             {
                 return HttpNotFound();
@@ -145,7 +145,7 @@ namespace Appointments.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
-            ApplicationRole applicationRole = await db.IdentityRoles.FindAsync(id);
+            ApplicationRole applicationRole = db.Roles.Find(id);
             applicationRole.IsDeleted = true;
             applicationRole.DateDeleted = applicationRole.DateUpdated;
             applicationRole.DeletedBy = this.User.Identity.Name;

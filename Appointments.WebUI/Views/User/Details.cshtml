@@ -105,30 +105,6 @@
         <dd>
             @Html.DisplayTextFor(model => model.DeletedBy)
         </dd>
-        <dt>
-            Roles
-        </dt>
-        <dd>
-            <table class="table">
-                <tr>
-                    <th>Roles</th>
-
-                </tr>
-                @foreach (var item in Model.Roles)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.RoleId)
-                        </td>
-                        @*<td>
-                            @Html.ActionLink("Edit", "Edit", "Appointment", new { id = item.Id }, null) | @*NO return to clients details list
-                            @Html.ActionLink("Details", "Details", "Appointment", new { id = item.Id }, null) | @*NO return to clients details list
-                            @Html.ActionLink("Delete", "Delete", "Appointment", new { id = item.Id }, null) @*NO return to clients details list
-                        </td>*@
-                    </tr>
-                }
-            </table>
-        </dd>
 
     </dl>
 </div>

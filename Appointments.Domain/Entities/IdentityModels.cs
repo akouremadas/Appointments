@@ -45,7 +45,7 @@ namespace Appointments.Domain.Entities
         [HiddenInput(DisplayValue = false)]
         public string UpdatedBy { get; set; }
 
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User, string> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
@@ -88,11 +88,57 @@ namespace Appointments.Domain.Entities
         public ApplicationRole(string roleName) : base(roleName) { }
     }
 
-    
-    public class ApplicationDbContext : IdentityDbContext<User>
+    public class ExpandedUserDTO
+    {
+        [Key]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        [Display(Name = "Lockout End Date Utc")]
+        public DateTime? LockoutEndDateUtc { get; set; }
+        public int AccessFailedCount { get; set; }
+        public string PhoneNumber { get; set; }
+        public IEnumerable<UserRolesDTO> Roles { get; set; }
+    }
+
+    public class UserRolesDTO
+    {
+        [Key]
+        [Display(Name = "Role Name")]
+        public string RoleName { get; set; }
+    }
+
+    public class UserRoleDTO
+    {
+        [Key]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+        [Display(Name = "Role Name")]
+        public string RoleName { get; set; }
+    }
+
+    public class RoleDTO
+    {
+        [Key]
+        public string Id { get; set; }
+        [Display(Name = "Role Name")]
+        public string RoleName { get; set; }
+    }
+
+    public class UserAndRolesDTO
+    {
+        [Key]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+        public List<UserRoleDTO> colUserRoleDTO { get; set; }
+    }
+
+
+    public class ApplicationDbContext : IdentityDbContext<User, ApplicationRole, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("DefaultConnection")
         {
         }
 
@@ -104,7 +150,7 @@ namespace Appointments.Domain.Entities
         public DbSet<Client> Clients { get; set; }
         public DbSet<Result> Results { get; set; }
 
-        public DbSet<ApplicationRole> IdentityRoles { get; set; }
+        //public DbSet<ApplicationRole> IdentityRoles { get; set; }
 
         //public DbSet<Phone> Phones { get; set; }
         //public DbSet<Address> Addresses { get; set; }
