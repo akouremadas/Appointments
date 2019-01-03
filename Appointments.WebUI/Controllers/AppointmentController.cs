@@ -6,7 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Appointments.Domain.Entities;
+using Appointments.WebUI.Models;
 
 namespace Appointments.WebUI.Controllers
 {
@@ -14,6 +16,8 @@ namespace Appointments.WebUI.Controllers
     public class AppointmentController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+      
+
 
         // GET: Appointment
         public ActionResult Index()
@@ -42,15 +46,26 @@ namespace Appointments.WebUI.Controllers
         {
             if (clID == null)
             {
+
+
+                var role = db.Roles.FirstOrDefault(m => m.Name == "Sales Rep");
+                ViewBag.UserId = new SelectList(db.Users.Where(m => m.Roles.Any(r => r.RoleId == role.Id)), "Id","FullName");
+
                 ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name");
                 ViewBag.ResultId = new SelectList(db.Results, "Id", "ResultName");
+                
+
                 return View();
             }
 
             else
             {
+                var role = db.Roles.FirstOrDefault(m => m.Name == "Sales Rep");
+                ViewBag.UserId = new SelectList(db.Users.Where(m => m.Roles.Any(r => r.RoleId == role.Id)), "Id", "FullName");
+
                 ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name", clID);
                 ViewBag.ResultId = new SelectList(db.Results, "Id", "ResultName");
+
                 return View();
             }
 
@@ -61,8 +76,9 @@ namespace Appointments.WebUI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,StartDateTime,ResultId,ClientId,Comments,DateCreated,DateUpdated,CreatedBy,UpdatedBy")] Appointment appointment, int? clID)
+        public ActionResult Create([Bind(Include = "Id,StartDateTime,ResultId,ClientId,Comments,DateCreated,DateUpdated,CreatedBy,UpdatedBy,UserId")] Appointment appointment, int? clID)
         {
+            
 
             if (clID == null)
             {
@@ -73,10 +89,23 @@ namespace Appointments.WebUI.Controllers
                     appointment.CreatedBy = User.Identity.Name;
                     appointment.UpdatedBy = User.Identity.Name;
 
+
+                    //commented code is not working!
+                    //if (User.IsInRole("Sales Rep"))
+                    //{
+                    //    User user = db.Users.Find(User.Identity.Name);
+
+                    //    appointment.UserId = user.Id;
+
+                    //}
+
                     db.Appointments.Add(appointment);
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
+
+                var role = db.Roles.FirstOrDefault(m => m.Name == "Sales Rep");
+                ViewBag.UserId = new SelectList(db.Users.Where(m => m.Roles.Any(r => r.RoleId == role.Id)), "Id", "FullName");
 
                 ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name", appointment.ClientId);
                 ViewBag.ResultId = new SelectList(db.Results, "Id", "ResultName", appointment.ResultId);
@@ -92,10 +121,22 @@ namespace Appointments.WebUI.Controllers
                     appointment.UpdatedBy = User.Identity.Name;
                     appointment.ClientId = (int)clID;
 
+                    //commented code is not working!
+                    //if (User.IsInRole("Sales Rep"))
+                    //{
+                    //    User user = db.Users.Find(User.Identity.Name);
+
+                    //    appointment.UserId = user.Id;
+
+                    //}
+
                     db.Appointments.Add(appointment);
                     db.SaveChanges();
                     return RedirectToAction("Details", "Client", new { id = clID});
                 }
+
+                var role = db.Roles.FirstOrDefault(m => m.Name == "Sales Rep");
+                ViewBag.UserId = new SelectList(db.Users.Where(m => m.Roles.Any(r => r.RoleId == role.Id)), "Id", "FullName");
 
                 ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name", appointment.ClientId = (int)clID);
                 ViewBag.ResultId = new SelectList(db.Results, "Id", "ResultName", appointment.ResultId);
@@ -138,7 +179,7 @@ namespace Appointments.WebUI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,StartDateTime,ResultId,ClientId,Comments,DateCreated,DateUpdated,CreatedBy,UpdatedBy")] Appointment appointment, int? clID)
+        public ActionResult Edit([Bind(Include = "Id,StartDateTime,ResultId,ClientId,Comments,DateCreated,DateUpdated,CreatedBy,UpdatedBy,UserId")] Appointment appointment, int? clID)
         {
 
             if (clID == null)
@@ -148,12 +189,26 @@ namespace Appointments.WebUI.Controllers
                     appointment.DateUpdated = DateTime.Now;
                     appointment.UpdatedBy = User.Identity.Name;
 
+                    //commented code is not working!
+                    //if (User.IsInRole("Sales Rep"))
+                    //{
+                    //    User user = db.Users.Find(User.Identity.Name);
+
+                    //    appointment.UserId = user.Id;
+
+                    //}
+
                     db.Entry(appointment).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
+
+                var role = db.Roles.FirstOrDefault(m => m.Name == "Sales Rep");
+                ViewBag.UserId = new SelectList(db.Users.Where(m => m.Roles.Any(r => r.RoleId == role.Id)), "Id", "FullName");
+
                 ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name", appointment.ClientId);
                 ViewBag.ResultId = new SelectList(db.Results, "Id", "ResultName", appointment.ResultId);
+
                 return View(appointment);
             }
 
@@ -165,10 +220,23 @@ namespace Appointments.WebUI.Controllers
                     appointment.UpdatedBy = User.Identity.Name;
                     appointment.ClientId = (int)clID;
 
+                    //commented code is not working!
+                    //if (User.IsInRole("Sales Rep"))
+                    //{
+                    //    User user = db.Users.Find(User.Identity.Name);
+
+                    //    appointment.UserId = user.Id;
+
+                    //}
+
                     db.Entry(appointment).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Details", "Client", new { id = clID });
                 }
+
+                var role = db.Roles.FirstOrDefault(m => m.Name == "Sales Rep");
+                ViewBag.UserId = new SelectList(db.Users.Where(m => m.Roles.Any(r => r.RoleId == role.Id)), "Id", "FullName");
+
                 ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name", appointment.ClientId = (int)clID);
                 ViewBag.ResultId = new SelectList(db.Results, "Id", "ResultName", appointment.ResultId);
                 return View(appointment);

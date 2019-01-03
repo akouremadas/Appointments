@@ -26,28 +26,57 @@
 <table class="table">
     <tr>
         <th>
-            Email
+            UserName @*@Html.DisplayNameFor(model => model.UserName)*@
         </th>
         <th>
-            Locked Out
+            Full Name @*@Html.DisplayNameFor(modelItem => item.FullName)*@
+        </th>
+        <th>
+            Email @*@Html.DisplayNameFor(modelItem => item.Email)*@
+        </th>
+        <th>
+            Date Created @*@Html.DisplayNameFor(modelItem => item.DateCreated)*@
+        </th>
+        <th>
+           Inactive? @*@Html.DisplayNameFor(modelItem => item.IsDeleted)*@
+        </th>
+        <th>
+            Date of Inactivity @*@Html.DisplayNameFor(modelItem => item.DateDeleted)*@
+        </th>
+        <th>
+            Set as Inactive by @*@Html.DisplayNameFor(modelItem => item.DeletedBy)*@
         </th>
         <th></th>
     </tr>
-
     @foreach (var item in Model)
     {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LockoutEndDateUtc)
+                @Html.DisplayFor(modelItem => item.DateCreated)
+            </td>
+            <td>
+                @Html.CheckBoxFor(modelItem => item.IsDeleted, new { disabled = "disabled" })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateDeleted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeletedBy)
             </td>
             <td>
                 @Html.ActionLink("Edit", "EditUser", new { UserName = item.UserName }) |
                 @if ((item.UserName.ToLower() != this.User.Identity.Name.ToLower()))
                 {
-                    @Html.ActionLink("Delete", "DeleteUser", new { UserName = item.UserName },
+                    @Html.ActionLink("Set as Inacive", "DeleteUser", new { UserName = item.UserName },
                     new { onclick = "return confirm('Are you sure you wish to delete this user?');" })
                 }
             </td>

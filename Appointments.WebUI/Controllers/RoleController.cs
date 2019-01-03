@@ -9,6 +9,8 @@ using System.Web;
 using System.Web.Mvc;
 using Appointments.Domain.Entities;
 using Appointments.WebUI.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace Appointments.WebUI.Controllers
 {
@@ -49,19 +51,19 @@ namespace Appointments.WebUI.Controllers
         }
 
         // GET: Role/Details/5
-        public async Task<ActionResult> Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ApplicationRole applicationRole = db.Roles.Find(id);
-            if (applicationRole == null)
-            {
-                return HttpNotFound();
-            }
-            return View(applicationRole);
-        }
+        //public ActionResult Details(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    ApplicationRole applicationRole = db.Roles.Find(id);
+        //    if (applicationRole == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(applicationRole);
+        //}
 
         // GET: Role/Create
         public ActionResult Create()
@@ -92,19 +94,19 @@ namespace Appointments.WebUI.Controllers
         }
 
         // GET: Role/Edit/5
-        public async Task<ActionResult> Edit(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ApplicationRole applicationRole = db.Roles.Find(id);
-            if (applicationRole == null)
-            {
-                return HttpNotFound();
-            }
-            return View(applicationRole);
-        }
+        //public ActionResult Edit(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    ApplicationRole applicationRole = db.Roles.Find(id);
+        //    if (applicationRole == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(applicationRole);
+        //}
 
         // POST: Role/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -126,33 +128,33 @@ namespace Appointments.WebUI.Controllers
         }
 
         // GET: Role/Delete/5
-        public async Task<ActionResult> Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ApplicationRole applicationRole = db.Roles.Find(id);
-            if (applicationRole == null)
-            {
-                return HttpNotFound();
-            }
-            return View(applicationRole);
-        }
+        //public ActionResult Delete(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    ApplicationRole applicationRole = db.Roles.Find(id);
+        //    if (applicationRole == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(applicationRole);
+        //}
 
         // POST: Role/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(string id)
-        {
-            ApplicationRole applicationRole = db.Roles.Find(id);
-            applicationRole.IsDeleted = true;
-            applicationRole.DateDeleted = applicationRole.DateUpdated;
-            applicationRole.DeletedBy = this.User.Identity.Name;
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> DeleteConfirmed(string id)
+        //{
+        //    ApplicationRole applicationRole = db.Roles.Find(id);
+        //    applicationRole.IsDeleted = true;
+        //    applicationRole.DateDeleted = applicationRole.DateUpdated;
+        //    applicationRole.DeletedBy = this.User.Identity.Name;
 
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
+        //    await db.SaveChangesAsync();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

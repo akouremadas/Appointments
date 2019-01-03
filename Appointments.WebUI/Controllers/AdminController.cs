@@ -26,7 +26,7 @@ using System.Web;
             try
             {
                 int intPage = 1;
-                int intPageSize = 5;
+                int intPageSize = 10;
                 int intTotalPageCount = 0;
 
                 if (searchStringUserNameOrEmail != null)
@@ -537,8 +537,8 @@ using System.Web;
                 new List<SelectListItem>();
 
             var roleManager =
-                new RoleManager<ApplicationRole>(
-                    new RoleStore<ApplicationRole>(new ApplicationDbContext()));
+                new RoleManager<Domain.Entities.ApplicationRole>(
+                    new RoleStore<Domain.Entities.ApplicationRole>(new ApplicationDbContext()));
 
             var colRoleSelectList = roleManager.Roles.OrderBy(x => x.Name).ToList();
 
@@ -636,10 +636,14 @@ using System.Web;
             {
                 throw new Exception("Could not find the User");
             }
+            user.IsDeleted = true;
+            user.DateDeleted = user.DateUpdated;
+            user.DeletedBy = this.User.Identity.Name;
+            user.PasswordHash = null;
 
             UserManager.RemoveFromRoles(user.Id, UserManager.GetRoles(user.Id).ToArray());
             UserManager.Update(user);
-            UserManager.Delete(user);
+            //UserManager.Delete(user);
         }
 
         private UserAndRolesDTO GetUserAndRoles(string UserName)

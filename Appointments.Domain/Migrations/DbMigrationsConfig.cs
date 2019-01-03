@@ -32,9 +32,9 @@ namespace Appointments.Domain.Migrations
 
             if (!context.Roles.Any(r => r.Name == roleName))
             {
-                var store = new RoleStore<ApplicationRole>(context);
-                var manager = new RoleManager<ApplicationRole>(store);
-                var role = new ApplicationRole { Name = roleName };
+                var store = new RoleStore<Entities.ApplicationRole>(context);
+                var manager = new RoleManager<Entities.ApplicationRole>(store);
+                var role = new Entities.ApplicationRole { Name = roleName };
 
                 manager.Create(role);
             }
@@ -57,9 +57,9 @@ namespace Appointments.Domain.Migrations
 
             if (!context.Roles.Any(r => r.Name == roleName1))
             {
-                var store = new RoleStore<ApplicationRole>(context);
-                var manager = new RoleManager<ApplicationRole>(store);
-                var role = new ApplicationRole { Name = roleName1 };
+                var store = new RoleStore<Entities.ApplicationRole>(context);
+                var manager = new RoleManager<Entities.ApplicationRole>(store);
+                var role = new Entities.ApplicationRole { Name = roleName1 };
 
                 manager.Create(role);
             }
@@ -82,9 +82,9 @@ namespace Appointments.Domain.Migrations
 
             if (!context.Roles.Any(r => r.Name == roleName2))
             {
-                var store = new RoleStore<ApplicationRole>(context);
-                var manager = new RoleManager<ApplicationRole>(store);
-                var role = new ApplicationRole { Name = roleName2 };
+                var store = new RoleStore<Entities.ApplicationRole>(context);
+                var manager = new RoleManager<Entities.ApplicationRole>(store);
+                var role = new Entities.ApplicationRole { Name = roleName2 };
 
                 manager.Create(role);
             }
@@ -107,9 +107,9 @@ namespace Appointments.Domain.Migrations
 
             if (!context.Roles.Any(r => r.Name == roleName3))
             {
-                var store = new RoleStore<ApplicationRole>(context);
-                var manager = new RoleManager<ApplicationRole>(store);
-                var role = new ApplicationRole { Name = roleName3 };
+                var store = new RoleStore<Entities.ApplicationRole>(context);
+                var manager = new RoleManager<Entities.ApplicationRole>(store);
+                var role = new Entities.ApplicationRole { Name = roleName3 };
 
                 manager.Create(role);
             }

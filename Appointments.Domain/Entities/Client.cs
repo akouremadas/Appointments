@@ -25,10 +25,6 @@ namespace Appointments.Domain.Entities
         public string Email { get; set; }
         
         public virtual ICollection<Appointment> Appointments { get; set; }
-        //public Phone Landline { get; set; }
-        //public Phone Mobile { get; set; }
-        //public Address ClientAddress { get; set; }
-        //public virtual ICollection<Phone> Phones { get; set; }
-        //public virtual ICollection<Address> Addresses { get; set; }
+
     }
 }

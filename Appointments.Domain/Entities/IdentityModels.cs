@@ -54,7 +54,7 @@ namespace Appointments.Domain.Entities
         }
     }
 
-    public class ApplicationRole: IdentityRole
+    public class ApplicationRole : IdentityRole
     {
         [Display(Name = "Date Created")]
         [HiddenInput(DisplayValue = false)]
@@ -90,6 +90,36 @@ namespace Appointments.Domain.Entities
 
     public class ExpandedUserDTO
     {
+        [Display(Name = "Full Name")]
+        public string FullName { get; set; }
+
+        [Display(Name = "User Status")]
+        [HiddenInput(DisplayValue = false)]
+        public bool IsDeleted { get; set; }
+
+        [Display(Name = "Date Status Changed")]
+        [HiddenInput(DisplayValue = false)]
+        public DateTime? DateDeleted { get; set; }
+
+        [Display(Name = "Status Changed By")]
+        [HiddenInput(DisplayValue = false)]
+        public string DeletedBy { get; set; }
+
+        [Display(Name = "Date Created")]
+        [HiddenInput(DisplayValue = false)]
+        public DateTime? DateCreated { get; set; }
+
+        [Display(Name = "Date Updated")]
+        [HiddenInput(DisplayValue = false)]
+        public DateTime? DateUpdated { get; set; }
+
+        [Display(Name = "Created By")]
+        [HiddenInput(DisplayValue = false)]
+        public string CreatedBy { get; set; }
+
+        [Display(Name = "Updated By")]
+        [HiddenInput(DisplayValue = false)]
+        public string UpdatedBy { get; set; }
         [Key]
         [Display(Name = "User Name")]
         public string UserName { get; set; }
@@ -135,7 +165,7 @@ namespace Appointments.Domain.Entities
     }
 
 
-    public class ApplicationDbContext : IdentityDbContext<User, ApplicationRole, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>
+    public class ApplicationDbContext : IdentityDbContext<User, IdentityRole, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>
     {
         public ApplicationDbContext()
             : base("DefaultConnection")
