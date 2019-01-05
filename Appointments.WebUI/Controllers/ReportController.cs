@@ -16,13 +16,18 @@ namespace Appointments.WebUI.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Report
-        public ActionResult AppointmentReport()
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+        public ActionResult Appointment()
         {
             var appointments = db.Appointments.Include(a => a.Client).Include(a => a.Result);
             return View(appointments.ToList());
         }
 
-        public ActionResult ClientReport()
+        public ActionResult Client()
         {
             return View(db.Clients.ToList());
         }
