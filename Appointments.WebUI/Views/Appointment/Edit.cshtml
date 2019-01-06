@@ -10,17 +10,28 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Appointment</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.UserId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("UserId", null, "--Επιλέξτε πωλητή--", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+        @Html.HiddenFor(model => model.SalesMan)
 
         <div class="form-group">
             @Html.LabelFor(model => model.StartDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.StartDateTime, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.StartDateTime, new { htmlAttributes = new { @class = "datetimepicker form-control" } })
                 @Html.ValidationMessageFor(model => model.StartDateTime, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -64,4 +75,31 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(function () {
+            $("#UserId").on("change", function () {
+                var ddtext = $("#UserId option:selected").text();
+                $("#SalesMan").val(ddtext);
+
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('.datetimepicker').datetimepicker({
+                inline: true,
+                sideBySide: true,
+                focusOnShow: false,
+                useCurrent: false,
+                collapse: true,
+                showClear: true,
+                toolbarPlacement: "top",
+                showTodayButton: true,
+                stepping: 5,
+                format: "DD/MM/YYYY HH:mm:00"
+            });
+        });
+    </script>
 }

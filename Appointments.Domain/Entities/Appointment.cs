@@ -13,7 +13,8 @@ namespace Appointments.Domain.Entities
     public class Appointment : ModelBase
     {
         [Display(Name ="ΗΜΕΡΟΜΗΝΙΑ/ΩΡΑ")]
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
         [Required]
         public DateTime StartDateTime { get; set; }
 
@@ -32,8 +33,9 @@ namespace Appointments.Domain.Entities
 
         [Display(Name = "ΠΩΛΗΤΗΣ")]
         [Required]
-        
         public string UserId { get; set; }
+
+        public string SalesMan { get; set; }
 
         public virtual IEnumerable<User> User { get; set; }
 

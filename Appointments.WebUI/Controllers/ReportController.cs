@@ -31,5 +31,24 @@ namespace Appointments.WebUI.Controllers
         {
             return View(db.Clients.ToList());
         }
+
+        public ActionResult _Appointment()
+        {
+           
+            var appointments = db.Appointments.Where(a => a.StartDateTime == DateTime.Today).Include(a => a.Client).Include(a => a.Result);
+            if (appointments.Count()>0)
+            {
+                return PartialView(appointments.ToList());
+            }
+            else
+            {
+                return Content("Δεν υπάρχουν καταχωρημένα ραντεβού για σήμερα!");
+            }
+        }
+
+        public ActionResult _Client()
+        {
+            return PartialView(db.Clients.ToList());
+        }
     }
 }

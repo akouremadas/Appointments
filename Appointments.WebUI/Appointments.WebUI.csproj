@@ -450,6 +450,8 @@
     <Content Include="Views\Report\Appointment.cshtml" />
     <Content Include="Views\Report\Client.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Shared\_Appointment.cshtml" />
+    <Content Include="Views\Shared\_Client.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

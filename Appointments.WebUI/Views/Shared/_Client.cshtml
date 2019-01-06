@@ -1,27 +1,33 @@
-﻿@model IEnumerable<Appointments.Domain.Entities.Appointment>
-
-@{
-    ViewBag.Title = "AppointmentReport";
-}
-
-<h2>Appointments Report</h2>
+﻿@model IEnumerable<Appointments.Domain.Entities.Client>
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Client.Name)
+            @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Result.ResultName)
+            @Html.DisplayNameFor(model => model.Prefecture)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StartDateTime)
+            @Html.DisplayNameFor(model => model.Municipality)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Comments)
+            @Html.DisplayNameFor(model => model.Area)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UserId)
+            @Html.DisplayNameFor(model => model.Street)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Postal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mobile)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fixed_Line)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.DateCreated)
@@ -49,19 +55,31 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Client.Name)
+            @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Result.ResultName)
+            @Html.DisplayFor(modelItem => item.Prefecture)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.StartDateTime)
+            @Html.DisplayFor(modelItem => item.Municipality)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Comments)
+            @Html.DisplayFor(modelItem => item.Area)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UserId)
+            @Html.DisplayFor(modelItem => item.Street)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Postal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mobile)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fixed_Line)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DateCreated)

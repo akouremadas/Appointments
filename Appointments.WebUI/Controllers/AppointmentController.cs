@@ -76,7 +76,7 @@ namespace Appointments.WebUI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,StartDateTime,ResultId,ClientId,Comments,DateCreated,DateUpdated,CreatedBy,UpdatedBy,UserId")] Appointment appointment, int? clID)
+        public ActionResult Create([Bind(Include = "Id,StartDateTime,ResultId,ClientId,Comments,DateCreated,DateUpdated,CreatedBy,UpdatedBy,UserId,SalesMan")] Appointment appointment, int? clID)
         {
             
 
@@ -147,7 +147,7 @@ namespace Appointments.WebUI.Controllers
         }
 
         // GET: Appointment/Edit/5
-        public ActionResult Edit(int? id, int? clID)
+        public ActionResult Edit(int? id, int? clID, string uid)
         {
             
 
@@ -164,10 +164,16 @@ namespace Appointments.WebUI.Controllers
             if (clID == null)
             {
                 ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name", appointment.ClientId);
+
+                var role = db.Roles.FirstOrDefault(m => m.Name == "Sales Rep");
+                ViewBag.UserId = new SelectList(db.Users.Where(m => m.Roles.Any(r => r.RoleId == role.Id)), "Id", "FullName", appointment.UserId == uid);
             }
             else //not working!!!
             {
-                ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name", appointment.ClientId == clID);
+                ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name", appointment.ClientId = (int)clID);
+
+                var role = db.Roles.FirstOrDefault(m => m.Name == "Sales Rep");
+                ViewBag.UserId = new SelectList(db.Users.Where(m => m.Roles.Any(r => r.RoleId == role.Id)), "Id", "FullName", appointment.UserId == uid);
             }
             
             ViewBag.ResultId = new SelectList(db.Results, "Id", "ResultName", appointment.ResultId);
@@ -179,7 +185,7 @@ namespace Appointments.WebUI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,StartDateTime,ResultId,ClientId,Comments,DateCreated,DateUpdated,CreatedBy,UpdatedBy,UserId")] Appointment appointment, int? clID)
+        public ActionResult Edit([Bind(Include = "Id,StartDateTime,ResultId,ClientId,Comments,DateCreated,DateUpdated,CreatedBy,UpdatedBy,UserId,SalesMan")] Appointment appointment, int? clID)
         {
 
             if (clID == null)
