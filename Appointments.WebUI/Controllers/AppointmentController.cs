@@ -147,7 +147,7 @@ namespace Appointments.WebUI.Controllers
         }
 
         // GET: Appointment/Edit/5
-        public ActionResult Edit(int? id, int? clID, string uid)
+        public ActionResult Edit(int? id, int? clID)
         {
             
 
@@ -164,18 +164,14 @@ namespace Appointments.WebUI.Controllers
             if (clID == null)
             {
                 ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name", appointment.ClientId);
-
-                var role = db.Roles.FirstOrDefault(m => m.Name == "Sales Rep");
-                ViewBag.UserId = new SelectList(db.Users.Where(m => m.Roles.Any(r => r.RoleId == role.Id)), "Id", "FullName", appointment.UserId == uid);
             }
             else //not working!!!
             {
-                ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name", appointment.ClientId = (int)clID);
-
-                var role = db.Roles.FirstOrDefault(m => m.Name == "Sales Rep");
-                ViewBag.UserId = new SelectList(db.Users.Where(m => m.Roles.Any(r => r.RoleId == role.Id)), "Id", "FullName", appointment.UserId == uid);
+                ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name", appointment.ClientId = (int)clID);             
             }
-            
+            var role = db.Roles.FirstOrDefault(m => m.Name == "Sales Rep");
+            ViewBag.UserId = new SelectList(db.Users.Where(m => m.Roles.Any(r => r.RoleId == role.Id)), "Id", "FullName", appointment.UserId);
+
             ViewBag.ResultId = new SelectList(db.Results, "Id", "ResultName", appointment.ResultId);
             return View(appointment);
         }
@@ -210,7 +206,7 @@ namespace Appointments.WebUI.Controllers
                 }
 
                 var role = db.Roles.FirstOrDefault(m => m.Name == "Sales Rep");
-                ViewBag.UserId = new SelectList(db.Users.Where(m => m.Roles.Any(r => r.RoleId == role.Id)), "Id", "FullName");
+                ViewBag.UserId = new SelectList(db.Users.Where(m => m.Roles.Any(r => r.RoleId == role.Id)), "Id", "FullName", appointment.UserId);
 
                 ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name", appointment.ClientId);
                 ViewBag.ResultId = new SelectList(db.Results, "Id", "ResultName", appointment.ResultId);
@@ -241,7 +237,7 @@ namespace Appointments.WebUI.Controllers
                 }
 
                 var role = db.Roles.FirstOrDefault(m => m.Name == "Sales Rep");
-                ViewBag.UserId = new SelectList(db.Users.Where(m => m.Roles.Any(r => r.RoleId == role.Id)), "Id", "FullName");
+                ViewBag.UserId = new SelectList(db.Users.Where(m => m.Roles.Any(r => r.RoleId == role.Id)), "Id", "FullName", appointment.UserId);
 
                 ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name", appointment.ClientId = (int)clID);
                 ViewBag.ResultId = new SelectList(db.Results, "Id", "ResultName", appointment.ResultId);
@@ -273,7 +269,7 @@ namespace Appointments.WebUI.Controllers
             Appointment appointment = db.Appointments.Find(id);
 
             appointment.IsDeleted = true;
-            appointment.DateDeleted = appointment.DateUpdated;
+            appointment.DateDeleted = DateTime.Now;
             appointment.DeletedBy = appointment.UpdatedBy;
             db.SaveChanges();
             return RedirectToAction("Index");

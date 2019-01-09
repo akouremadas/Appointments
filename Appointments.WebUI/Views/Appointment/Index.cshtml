@@ -11,6 +11,12 @@
 </p>
 <table class="table">
     <tr>
+        @if (User.IsInRole("Admin") || User.IsInRole("Supervisor") || User.IsInRole("Team Leader") || User.IsInRole("Handler"))
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.SalesMan)
+            </th>
+        }
         <th>
             @Html.DisplayNameFor(model => model.Client.Name)
         </th>
@@ -24,38 +30,53 @@
             @Html.DisplayNameFor(model => model.Comments)
         </th>
         <th></th>
+        <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-        if (item.IsDeleted == false)
+        if ((item.IsDeleted == false) || (item.CreatedBy == User.Identity.Name))
         {
-            if (User.IsInRole("Admin") || User.IsInRole("Supervisor") || User.IsInRole("Team Leader") || User.IsInRole("Handler"))
-            {
-                <tr>
+            <tr>
+                @if (User.IsInRole("Admin") || User.IsInRole("Supervisor") || User.IsInRole("Team Leader") || User.IsInRole("Handler"))
+                {
                     <td>
-                        @Html.DisplayFor(modelItem => item.Client.Name)
+                        @Html.DisplayFor(modelItem => item.SalesMan)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Result.ResultName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StartDateTime)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Comments)
-                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Client.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Result.ResultName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comments)
+                </td>
+                @if (User.IsInRole("Admin") || User.IsInRole("Supervisor") || User.IsInRole("Team Leader") || User.IsInRole("Handler"))
+                {
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                         @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                         @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                     </td>
-                </tr>
-            }
-            else
-            {
-                if (item.CreatedBy == User.Identity.Name)
+                }
+                else
                 {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    </td>
+                }
+
+            </tr>
+            @*else
+            {
+                            if (item.CreatedBy == User.Identity.Name)
+                            {
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.Client.Name)
@@ -74,10 +95,11 @@
                             @Html.ActionLink("Details", "Details", new { id = item.Id })
                         </td>
                     </tr>
-                }
-            }
-        }
+                            }
+                        }
+                    }*@
 
+        }
     }
 
 </table>

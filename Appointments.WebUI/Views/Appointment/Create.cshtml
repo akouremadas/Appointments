@@ -81,9 +81,9 @@
 
             });
         });
-    </script>
+    @*</script>
+    <script type="text/javascript">*@
 
-    <script type="text/javascript">
         $(function () {
             $('.datetimepicker').datetimepicker({
                 inline: false,
@@ -96,7 +96,18 @@
                 showTodayButton: true,
                 stepping: 5,
                 format: "DD/MM/YYYY HH:mm:00"
+                
             });
         });
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            if (isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
     </script>
 }
