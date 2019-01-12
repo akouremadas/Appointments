@@ -26,6 +26,7 @@ namespace Appointments.WebUI.Controllers
             return View(appointments.ToList());
         }
 
+
         // GET: Appointment/Details/5
         public ActionResult Details(int? id)
         {
