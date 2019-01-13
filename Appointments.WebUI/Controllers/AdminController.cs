@@ -69,7 +69,6 @@ using System.Web;
 
                     objUserDTO.UserName = item.UserName;
                     objUserDTO.Email = item.Email;
-                    objUserDTO.LockoutEndDateUtc = item.LockoutEndDateUtc;
 
                     col_UserDTO.Add(objUserDTO);
                 }
@@ -573,8 +572,6 @@ using System.Web;
 
             objExpandedUserDTO.UserName = result.UserName;
             objExpandedUserDTO.Email = result.Email;
-            objExpandedUserDTO.LockoutEndDateUtc = result.LockoutEndDateUtc;
-            objExpandedUserDTO.AccessFailedCount = result.AccessFailedCount;
             objExpandedUserDTO.PhoneNumber = result.PhoneNumber;
 
             return objExpandedUserDTO;

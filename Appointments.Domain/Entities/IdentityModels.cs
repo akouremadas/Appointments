@@ -125,9 +125,7 @@ namespace Appointments.Domain.Entities
         public string UserName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        [Display(Name = "Lockout End Date Utc")]
-        public DateTime? LockoutEndDateUtc { get; set; }
-        public int AccessFailedCount { get; set; }
+        [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
         public IEnumerable<UserRolesDTO> Roles { get; set; }
     }
