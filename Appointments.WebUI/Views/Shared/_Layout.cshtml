@@ -11,38 +11,40 @@
 <body>
     @if (User.Identity.IsAuthenticated)
     {
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("D2D AMS", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        @if (User.IsInRole("Sales Rep"))
-                        {
-                            <li>@Html.ActionLink("My Appointments", "Index", "Appointment")</li>
-                            <li>@Html.ActionLink("My Clients", "Index", "Client")</li>
-                        }
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img src="~/Content/D2D_Appointments_Logo_134x55.png" alt="D2D AMS" class="mr-auto mt-auto rounded mx-auto d-block" />
+                     @*@Html.ActionLink("D2D AMS", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    @if (User.IsInRole("Sales Rep"))
+                    {
+                        <li>@Html.ActionLink("My Appointments", "Index", "Appointment")</li>
+                        <li>@Html.ActionLink("My Clients", "Index", "Client")</li>
+                    }
 
 
-                        @if (User.IsInRole("Handler") || User.IsInRole("Team Leader") || User.IsInRole("Supervisor") || User.IsInRole("Admin"))
-                        {
-                            <li>@Html.ActionLink("All Appointments", "Index", "Appointment")</li>
-                            <li>@Html.ActionLink("All Clients", "Index", "Client")</li>
-                            <li>@Html.ActionLink("Manage Appointments Results", "Index", "Result")</li>
-                            <li>@Html.ActionLink("Administration", "Index", "Admin")</li>
-                        }
-                    </ul>
-                    @Html.Partial("_LoginPartial")
-                </div>
+                    @if (User.IsInRole("Handler") || User.IsInRole("Team Leader") || User.IsInRole("Supervisor") || User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("All Appointments", "Index", "Appointment")</li>
+                        <li>@Html.ActionLink("All Clients", "Index", "Client")</li>
+                        <li>@Html.ActionLink("Manage Appointments Results", "Index", "Result")</li>
+                        <li>@Html.ActionLink("Administration", "Index", "Admin")</li>
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
+    </div>
+
     }
     <div class="container body-content">
         @RenderBody()

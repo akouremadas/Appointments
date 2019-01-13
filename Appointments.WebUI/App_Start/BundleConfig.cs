@@ -32,6 +32,7 @@ namespace Appointments.WebUI
 
             bundles.Add(new StyleBundle("~/Content/datepicker").Include(
                      "~/Content/bootstrap-datetimepicker.min.css"));
+
         }
     }
 }
