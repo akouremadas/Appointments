@@ -7,9 +7,9 @@
 }
 <br />
 <p>
-    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-default" })
-    @Html.ActionLink("Edit Roles", "ViewAllRoles", null, new { @class = "btn btn-default" })
-    @Html.ActionLink("Back to Home", "../", "Home", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary btn-sm" })
+    @Html.ActionLink("Edit Roles", "ViewAllRoles", null, new { @class = "btn btn-info btn-sm" })
+    @Html.ActionLink("Back to Home", "../", "Home", null, new { @class = "btn btn-secondary btn-sm" })
 </p>
 <br />
 @using (Html.BeginForm("Index", "Admin", FormMethod.Get))
@@ -73,11 +73,11 @@
                 @Html.DisplayFor(modelItem => item.DeletedBy)
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditUser", new { UserName = item.UserName }) |
+                @Html.ActionLink("Edit", "EditUser", new { UserName = item.UserName }, new { @class = "btn btn-warning btn-sm" })
                 @if ((item.UserName.ToLower() != this.User.Identity.Name.ToLower()))
                 {
                     @Html.ActionLink("Set as Inacive", "DeleteUser", new { UserName = item.UserName },
-                    new { onclick = "return confirm('Are you sure you wish to delete this user?');" })
+                    new { @class = "btn btn-danger btn-sm" , onclick = "return confirm('Are you sure you wish to delete this user?');" })
                 }
             </td>
         </tr>

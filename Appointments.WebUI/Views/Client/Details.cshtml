@@ -85,10 +85,14 @@
             Appointments History @*@Html.DisplayNameFor(model => model.Appointments)*@
         </dt>
         <dd>
-            <table class="table">
+            <table class="table table-bordered table-responsive-lg text-center">
+
+                        @Html.ActionLink("Create New Appointment", "Create", "Appointment", new { clID = Model.Id }, new { @class = "btn btn-primary btn-sm" })
+
                 <tr>
                     <th>Appointment Date & Time</th>
                     <th>Result</th>
+                    <th>Actions</th>
                 </tr>
                 @foreach (var item in Model.Appointments)
                 {
@@ -100,20 +104,18 @@
                             @Html.DisplayFor(modelItem => item.Result.ResultName)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", "Appointment", new { id = item.Id }, null) | @*NO return to clients details list*@
-                            @Html.ActionLink("Details", "Details", "Appointment", new { id = item.Id }, null) | @*NO return to clients details list*@
-                            @Html.ActionLink("Delete", "Delete", "Appointment", new { id = item.Id }, null) @*NO return to clients details list*@
+                            @Html.ActionLink("Details", "Details", "Appointment", new { id = item.Id }, new { @class = "btn btn-info btn-sm" })@*NO return to clients details list*@
+                            @Html.ActionLink("Edit", "Edit", "Appointment", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })@*NO return to clients details list*@
+                            @Html.ActionLink("Delete", "Delete", "Appointment", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })@*NO return to clients details list*@
                         </td>
                     </tr>
                 }
-                    <tr>
-                        @Html.ActionLink("Create New", "Create", "Appointment", new { clID = Model.Id }, null)
-                    </tr>
+
             </table>
         </dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning btn-sm" })
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary btn-sm" })
 </p>

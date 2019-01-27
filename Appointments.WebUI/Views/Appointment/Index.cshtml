@@ -7,33 +7,33 @@
 <h3>Appointments Index</h3>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New Appointment", "Create", null, new { @class = "btn btn-primary btn-sm" })
 </p>
 
 <br />
-<table id="index_appointments"  class="table table-responsive table-hover table-striped table-bordered text-center" role="grid">
+<table id="index_appointments" class="table table-sm table-responsive-lg table-hover table-striped table-bordered text-center">
     <thead>
         <tr>
-            <th class="text-center">#</th>
+            <th>#</th>
             @if (User.IsInRole("Admin") || User.IsInRole("Supervisor") || User.IsInRole("Team Leader") || User.IsInRole("Handler"))
             {
                 <th class="text-center">
                     @Html.DisplayNameFor(model => model.SalesMan)
                 </th>
             }
-            <th class="text-center">
+            <th>
                 @Html.DisplayNameFor(model => model.Client.Name)
-            </thclass=">
-            <th class="text-center">
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Result.ResultName)
             </th>
-            <th class="text-center">
+            <th>
                 @Html.DisplayNameFor(model => model.StartDateTime)
             </th>
-            <th class="text-center">
+            <th>
                 @Html.DisplayNameFor(model => model.Comments)
             </th>
-            <th class="noExport text-center">Actions</th>
+            <th class="noExport">Actions</th>
             @*<th></th>*@
         </tr>
     </thead>
@@ -67,16 +67,20 @@
                     @if (User.IsInRole("Admin") || User.IsInRole("Supervisor") || User.IsInRole("Team Leader") || User.IsInRole("Handler"))
                     {
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            <div class="btn-group btn-group-sm" role="group">
+                                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info btn-sm" })
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+                            </div>
                         </td>
                     }
                     else
                     {
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.Id })
+                            <div class="btn-group btn-group-sm" role="group">
+                                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info btn-sm" })
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })
+                            </div>
                         </td>
                     }
 
@@ -128,8 +132,10 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.2.7/css/select.dataTables.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+@*<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">*@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.2.7/css/select.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.bootstrap4.min.css">
+
 <style type="text/css" class="init">
 </style>
 @section Scripts {
@@ -139,6 +145,8 @@
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
+    @*<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>*@
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
     <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
     <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
@@ -147,7 +155,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-    var t = $('#index_appointments').DataTable({
+            var t = $('#index_appointments').DataTable({
                 orderMulti: true,
                 pagingType: "full_numbers",
                 orderClasses: true,
@@ -163,15 +171,19 @@
                 select: {
                     style: 'multi'
                 },
-                dom: 'Bfrtip',
+                dom: 'Brtip',
                 buttons:
                     [
-                        'pageLength',
+                        {
+                            extend: 'pageLength',
+                            className: 'btn btn-secondary btn-sm'
+                        },
 
                         {
                             extend: 'collection',
                             autoClose: true,
                             text: 'Export ...',
+                            className:'btn btn-secondary btn-sm',
                             buttons:
                                 [
                                     {
@@ -203,6 +215,7 @@
                         {
                             extend: 'collection',
                             text: 'Select ...',
+                            className: 'btn btn-secondary btn-sm',
                             autoClose: true,
                             buttons:
                                 [
@@ -223,25 +236,25 @@
                     cell.innerHTML = i + 1;
                     t.cell(cell).invalidate('dom');
                 });
-                }).draw();
+            }).draw();
 
-            
+
 
             $("#index_appointments tfoot th:not(.noSearch)").each(function (i) {
-                    $(this).html('<input type="text" class="text-center" placeholder="Search"/>');
+                $(this).html('<input type="text" class="text-center" placeholder="Search"/>');
             });
-                // Apply the search
-                t.columns().every(function () {
-                    var that = this;
+            // Apply the search
+            t.columns().every(function () {
+                var that = this;
 
-                    $('input', this.footer()).on('keyup change', function () {
-                        if (that.search() !== this.value) {
-                            that
-                                .search(this.value)
-                                .draw();
-                        }
-                    });
+                $('input', this.footer()).on('keyup change', function () {
+                    if (that.search() !== this.value) {
+                        that
+                            .search(this.value)
+                            .draw();
+                    }
                 });
+            });
 
         });
     </script>
