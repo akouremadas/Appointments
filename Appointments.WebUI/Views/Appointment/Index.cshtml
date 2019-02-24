@@ -117,7 +117,10 @@
     <tfoot>
         <tr>
             <th style="column-width:inherit" class="noSearch"></th>
-            <th style="column-width:inherit"></th>
+            @if (User.IsInRole("Admin") || User.IsInRole("Supervisor") || User.IsInRole("Team Leader") || User.IsInRole("Handler"))
+            {
+                <th style="column-width:inherit"></th>
+            }
             <th style="column-width:inherit"></th>
             <th style="column-width:inherit"></th>
             <th style="column-width:inherit"></th>
