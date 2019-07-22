@@ -6,80 +6,91 @@
 
 <h3>Client Details</h3>
 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6"> 
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Prefecture)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Prefecture)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Municipality)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Municipality)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Area)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Area)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Street)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Street)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Postal)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Postal)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-sm-6">
+            <dl>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Mobile)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Mobile)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Fixed_Line)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Fixed_Line)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+            </dl>
+        </div>
+    </div>
+</div>
 <div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Prefecture)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Prefecture)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Municipality)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Municipality)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Area)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Area)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Street)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Street)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Postal)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Postal)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Mobile)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Mobile)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Fixed_Line)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Fixed_Line)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+    <dl>
 
         <dt>
             Appointments History @*@Html.DisplayNameFor(model => model.Appointments)*@
@@ -90,9 +101,9 @@
             </div>
             <br />
             <table class="table table-bordered table-responsive-lg text-center">
-                
-                   
-               
+
+
+
                 <tr>
                     <th>Appointment Date & Time</th>
                     <th>Result</th>
