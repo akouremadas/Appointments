@@ -9,7 +9,7 @@
 <p>
     @Html.ActionLink("Create New Client", "Create", null, new { @class = "btn btn-primary btn-sm" })
 </p>
-<table id="index_clients" class="table table-responsive-lg table-hover table-striped table-bordered text-center">
+<table id="index_clients" class="table table-sm table-responsive-md table-hover table-striped table-bordered text-center">
     <thead>
         <tr>
             <th>#</th>
@@ -238,6 +238,13 @@
                     }
                 });
             });
+
+            var r = $('#index_clients tfoot tr');
+            r.find('th').each(function () {
+                $(this).css('padding', 8);
+            });
+            $('#index_clients thead').append(r);
+            $('#search_0').css('text-align', 'center');
 
         });
     </script>

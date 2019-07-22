@@ -1,5 +1,19 @@
 ﻿@model IEnumerable<Appointments.Domain.Entities.Appointment>
 
+
+
+<table class="table">
+    <tr>
+        <td>
+            Appointments I created
+        </td>
+        <td>
+            @Model.Count(a => a.CreatedBy == User.Identity.Name)
+        </td>
+    </tr>
+</table>
+
+
 <table class="table">
     <tr>
         <th>
@@ -15,7 +29,7 @@
             @Html.DisplayNameFor(model => model.Comments)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UserId)
+            @Html.DisplayNameFor(model => model.SalesMan)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.DateCreated)
@@ -59,7 +73,7 @@
                     @Html.DisplayFor(modelItem => item.Comments)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.UserId)
+                    @Html.DisplayFor(modelItem => item.SalesMan)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DateCreated)

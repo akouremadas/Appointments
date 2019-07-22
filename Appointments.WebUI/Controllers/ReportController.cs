@@ -35,7 +35,7 @@ namespace Appointments.WebUI.Controllers
         public ActionResult _Appointment()
         {
            
-            var appointments = db.Appointments.Where(a => a.StartDateTime == DateTime.Today).Include(a => a.Client).Include(a => a.Result);
+            var appointments = db.Appointments.Where(a => a.SalesMan == User.Identity.Name).Include(a => a.Client).Include(a => a.Result);
             if (appointments.Count()>0)
             {
                 return PartialView(appointments.ToList());

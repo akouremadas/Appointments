@@ -7,7 +7,7 @@
 }
 <br />
 <p>
-    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary btn-sm" })
+    @Html.ActionLink("Create New User", "Create", null, new { @class = "btn btn-primary btn-sm" })
     @Html.ActionLink("Edit Roles", "ViewAllRoles", null, new { @class = "btn btn-info btn-sm" })
     @Html.ActionLink("Back to Home", "../", "Home", null, new { @class = "btn btn-secondary btn-sm" })
 </p>
@@ -23,7 +23,7 @@
 }
 <br />
 
-<table class="table">
+<table class="table table-responsive-lg table-hover table-striped table-bordered text-center">
     <tr>
         <th>
             UserName @*@Html.DisplayNameFor(model => model.UserName)*@
