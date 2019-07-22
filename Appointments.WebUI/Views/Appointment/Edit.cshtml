@@ -79,7 +79,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary btn-sm" })
+    @Html.ActionLink("Back to List", "Details", "Client", new { id = Model.ClientId }, new { @class = "btn btn-secondary btn-sm" })
 </div>
 
 @section Scripts {
