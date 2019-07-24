@@ -45,12 +45,18 @@
         <dt>
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
+    <div class="btn-toolbar" role="toolbar">
+        <div class="btn-group mr-2" role="group">
             <input type="submit" value="Delete" class="btn btn-danger btn-sm" />
-            @Html.ActionLink("Back to List", "Details", "Client", new { id = Model.ClientId }, new { @class = "btn btn-secondary btn-sm" })
         </div>
+        <div class="btn-group mr-2" role="group">
+            @*@Html.ActionLink("Back to List", "Details", "Client", new { id = Model.ClientId }, new { @class = "btn btn-secondary btn-sm" })*@
+            <a class="btn btn-secondary btn-sm" href="javascript:history.back()">Cancel</a>
+        </div>
+    </div>
     }
 </div>
