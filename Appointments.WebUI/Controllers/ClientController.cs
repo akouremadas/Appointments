@@ -48,7 +48,7 @@ namespace Appointments.WebUI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Prefecture,Municipality,Area,Street,Postal,Mobile,Fixed_Line,Email,DateCreated,DateUpdated,CreatedBy,UpdatedBy")] Client client)
+        public ActionResult Create([Bind(Include = "Id,Name,Prefecture,Municipality,Area,Street,Postal,Profession,Mobile,Fixed_Line,Email,DateCreated,DateUpdated,CreatedBy,UpdatedBy")] Client client)
         {
 
             if (ModelState.IsValid)
@@ -86,7 +86,7 @@ namespace Appointments.WebUI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Prefecture,Municipality,Area,Street,Postal,Mobile,Fixed_Line,Email,DateCreated,DateUpdated,CreatedBy,UpdatedBy")] Client client)
+        public ActionResult Edit([Bind(Include = "Id,Name,Prefecture,Municipality,Area,Street,Postal,Profession,Mobile,Fixed_Line,Email,DateCreated,DateUpdated,CreatedBy,UpdatedBy")] Client client)
         {
             if (ModelState.IsValid)
             {

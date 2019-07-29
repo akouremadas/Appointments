@@ -21,6 +21,7 @@ namespace Appointments.Domain.Entities
 
         [Display(Name = "Zip Code")]
         public string Postal { get; set; }
+        public string Profession { get; set; }
         public string Mobile { get; set; }
 
         [Display(Name = "Fixed Line")]
